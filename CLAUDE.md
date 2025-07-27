@@ -28,3 +28,36 @@ Bump the patch number up every update so we can keep track of what version is in
 3. Polls GitHub API for status checks and check runs
 4. Exits 0 if all pass, exits 1 if any fail
 5. Prints clear failure messages for failed checks
+
+## Testing
+
+The tool includes a GitHub Actions workflow that runs:
+- Go build and test
+- Nix build verification  
+- Linting with golangci-lint
+
+### Manual Testing
+
+To test the automerge tool:
+
+1. **Success case**: Create a PR with passing CI
+   ```bash
+   # Make a simple change, commit, push
+   git checkout -b test-branch
+   echo "test" >> CLAUDE.md
+   git add . && git commit -m "test change" && git push -u origin test-branch
+   gh pr create --title "Test PR" --body "Testing automerge"
+   ./automerge  # Should exit 0 when all checks pass
+   ```
+
+2. **Failure case**: Create a PR with failing CI
+   ```bash
+   # Add unused import to trigger linting error
+   # Edit main.go to add: import "net/http" (unused)
+   git add . && git commit -m "trigger CI failure" && git push
+   ./automerge  # Should exit 1 and show failure details
+   ```
+
+Expected behavior:
+- Success: Polls with dots, then "✅ All status checks passed!" and exit 0
+- Failure: Shows "❌ [check]: [reason]" and exit 1
