@@ -28,3 +28,10 @@ Bump the patch number up every update so we can keep track of what version is in
 3. Polls GitHub API for status checks and check runs
 4. Exits 0 if all pass, exits 1 if any fail
 5. Prints clear failure messages for failed checks
+
+## Testing
+
+The tool includes a GitHub Actions workflow that runs:
+- Go build and test
+- Nix build verification  
+- Linting with golangci-lint
