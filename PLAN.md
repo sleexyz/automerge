@@ -1,4 +1,4 @@
-# Automerge Tool - Design Plan
+# wait-ci Tool - Design Plan
 
 ## Overview
 Create a tool that polls GitHub API for status checks on the current branch and exits with appropriate codes based on check results.

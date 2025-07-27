@@ -1,5 +1,5 @@
 {
-  description = "automerge - Poll GitHub status checks and exit based on results";
+  description = "wait-ci - Poll GitHub status checks and exit based on results";
   
   # Set the flake name for profile installation
   nixConfig = {
@@ -15,14 +15,14 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        automerge = pkgs.callPackage ./automerge.nix { };
+        wait-ci = pkgs.callPackage ./package.nix { };
       in {
         packages = {
-          default = automerge;
-          automerge = automerge;
+          default = wait-ci;
+          wait-ci = wait-ci;
         };
         
-        # Development shell for working on automerge
+        # Development shell for working on wait-ci
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
             go
@@ -31,7 +31,7 @@
           ];
           
           shellHook = ''
-            echo "automerge development environment loaded"
+            echo "wait-ci development environment loaded"
             echo "Available commands: go build, go test, go run ."
           '';
         };

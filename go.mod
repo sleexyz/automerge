@@ -1,4 +1,4 @@
-module automerge
+module wait-ci
 
 go 1.21
 

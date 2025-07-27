@@ -37,12 +37,12 @@ type ChecksResponse struct {
 
 func main() {
 	if len(os.Args) > 1 && (os.Args[1] == "--version" || os.Args[1] == "-v") {
-		fmt.Printf("automerge version %s\n", version)
+		fmt.Printf("wait-ci version %s\n", version)
 		os.Exit(0)
 	}
 
 	if len(os.Args) > 1 && (os.Args[1] == "--help" || os.Args[1] == "-h") {
-		fmt.Println("Usage: automerge")
+		fmt.Println("Usage: wait-ci")
 		fmt.Println("Polls GitHub API for status checks on current branch.")
 		fmt.Println("Exits 0 if all checks pass, exits 1 if any fail.")
 		os.Exit(0)
