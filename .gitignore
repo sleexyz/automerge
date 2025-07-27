@@ -1,0 +1,12 @@
+# Binaries
+automerge
+result
+result-*
+
+# Go
+*.test
+*.prof
+coverage.out
+
+# Development
+_sandbox/

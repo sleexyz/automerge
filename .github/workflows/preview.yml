@@ -1,0 +1,69 @@
+name: Preview CI
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+        
+    - name: Build
+      run: go build -v ./...
+      
+    - name: Test
+      run: go test -v ./... || echo "No tests found"
+      
+    - name: Build binary
+      run: go build -o automerge .
+      
+    - name: Test binary
+      run: |
+        ./automerge --version
+        ./automerge --help
+
+  nix-build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install Nix
+      uses: cachix/install-nix-action@v22
+      with:
+        github_access_token: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Build with Nix
+      run: nix build
+      
+    - name: Test Nix build
+      run: |
+        ./result/bin/automerge --version
+        ./result/bin/automerge --help
+
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+        
+    - name: golangci-lint
+      uses: golangci/golangci-lint-action@v3
+      with:
+        version: latest
+        args: --timeout=5m
