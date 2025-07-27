@@ -7,6 +7,8 @@ import (
 	"os/exec"
 	"strings"
 	"time"
+	// This will cause a linting error - unused import
+	"net/http"
 )
 
 var version = "1.0.0"
