@@ -1,12 +1,45 @@
-# Binaries
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+wait-ci
 automerge
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go build command
+*.prof
+coverage.out
+
+# Go workspace file
+go.work
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Nix build results
 result
 result-*
 
-# Go
-*.test
-*.prof
-coverage.out
+# Temporary files
+*.tmp
+*.temp
 
 # Development
 _sandbox/

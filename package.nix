@@ -1,4 +1,4 @@
-# automerge.nix
+# package.nix
 { lib
 , buildGoModule
 , gh
@@ -6,7 +6,7 @@
 }:
 
 buildGoModule {
-  pname = "automerge";
+  pname = "wait-ci";
   version = "1.0.0";
 
   src = ./.;
@@ -30,9 +30,9 @@ buildGoModule {
 
   meta = with lib; {
     description = "Poll GitHub status checks and exit based on results";
-    homepage = "https://github.com/sleexyz/automerge";
+    homepage = "https://github.com/sleexyz/wait-ci";
     license = licenses.mit;
     maintainers = [ ];
-    mainProgram = "automerge";
+    mainProgram = "wait-ci";
   };
 }

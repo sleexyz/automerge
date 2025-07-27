@@ -4,16 +4,16 @@ Bump the patch number up every update so we can keep track of what version is in
 
 ## Build & Test
 
-- `go build -o automerge .` - Build binary
-- `./automerge` - Test locally built binary  
+- `go build -o wait-ci .` - Build binary
+- `./wait-ci` - Test locally built binary  
 - `nix build` - Build via Nix
 - `nix profile install .` - Install via nix profile
 
 ## Usage
 
-- `automerge` - Poll status checks on current branch
-- `automerge --help` - Show help
-- `automerge --version` - Show version
+- `wait-ci` - Poll status checks on current branch
+- `wait-ci --help` - Show help
+- `wait-ci --version` - Show version
 
 ## Requirements
 
@@ -38,7 +38,7 @@ The tool includes a GitHub Actions workflow that runs:
 
 ### Manual Testing
 
-To test the automerge tool:
+To test the wait-ci tool:
 
 1. **Success case**: Create a PR with passing CI
    ```bash
@@ -46,8 +46,8 @@ To test the automerge tool:
    git checkout -b test-branch
    echo "test" >> CLAUDE.md
    git add . && git commit -m "test change" && git push -u origin test-branch
-   gh pr create --title "Test PR" --body "Testing automerge"
-   ./automerge  # Should exit 0 when all checks pass
+   gh pr create --title "Test PR" --body "Testing wait-ci"
+   ./wait-ci  # Should exit 0 when all checks pass
    ```
 
 2. **Failure case**: Create a PR with failing CI
@@ -55,7 +55,7 @@ To test the automerge tool:
    # Add unused import to trigger linting error
    # Edit main.go to add: import "net/http" (unused)
    git add . && git commit -m "trigger CI failure" && git push
-   ./automerge  # Should exit 1 and show failure details
+   ./wait-ci  # Should exit 1 and show failure details
    ```
 
 Expected behavior:
